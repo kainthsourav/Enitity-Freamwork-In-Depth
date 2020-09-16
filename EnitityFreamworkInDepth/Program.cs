@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EnitityFreamworkInDepth
 {
-
+ 
    
     class Program
     {
@@ -35,13 +35,17 @@ namespace EnitityFreamworkInDepth
             //using enum to give value
             var UserType = new UserProfile()
             {
-                UserProfileId = 549,
+                UserProfileId = 551,
                 UserName = "Sourav",
                 UserMemberShipType = User_memeberShipType.Plantium //using enum here
             };
             DiffContext.UserProfiles.Add(UserType);
-            DiffContext.SaveChanges();
+            //DiffContext.SaveChanges();
 
+            //Video game Excercise
+            var videoContext = new VidzyEntities1();
+
+            videoContext.AddVideo("Call of Duty", DateTime.Now, "Action", (byte?)classification.Platnium);
         }
     }
 }
