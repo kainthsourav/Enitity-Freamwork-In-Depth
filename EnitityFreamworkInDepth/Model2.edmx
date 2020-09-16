@@ -149,6 +149,13 @@ warning 6002: The table/view 'Kainthsourav.dbo.customer_issue_details' does not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
         <EntityContainer Name="KainthsouravModelStoreContainer">
           <EntitySet Name="customer_master" EntityType="Self.customer_master" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="library_card_master" EntityType="Self.library_card_master" Schema="dbo" store:Type="Tables" />
@@ -349,6 +356,13 @@ warning 6002: The table/view 'Kainthsourav.dbo.customer_issue_details' does not 
           </AssociationSet>
           <EntitySet Name="UserProfiles" EntityType="KainthsouravModel.UserProfile" />
           <EntitySet Name="sysdiagrams" EntityType="KainthsouravModel.sysdiagram" />
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="GetData" ReturnType="Collection(KainthsouravModel.GetData_Result)" />
         </EntityContainer>
         <EntityType Name="UserProfile">
           <Key>
@@ -367,6 +381,20 @@ warning 6002: The table/view 'Kainthsourav.dbo.customer_issue_details' does not 
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
+        <ComplexType Name="GetData_Result">
+          <Property Type="String" Name="movie_id" Nullable="false" MaxLength="6" />
+          <Property Type="String" Name="move_name" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="release_Year" Nullable="false" />
+          <Property Type="String" Name="language" Nullable="false" MaxLength="15" />
+          <Property Type="Int32" Name="rating" Nullable="false" />
+          <Property Type="Int32" Name="duration_in_mintues" Nullable="false" />
+          <Property Type="String" Name="movie_type" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="movie_category" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="director_name" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="lead_actor_name1" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="lead_actor_name2" Nullable="false" MaxLength="40" />
+          <Property Type="Int32" Name="rental_cost" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -462,6 +490,25 @@ warning 6002: The table/view 'Kainthsourav.dbo.customer_issue_details' does not 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="KainthsouravModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="GetData" FunctionName="KainthsouravModel.Store.GetData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KainthsouravModel.GetData_Result">
+                <ScalarProperty Name="movie_id" ColumnName="movie_id" />
+                <ScalarProperty Name="move_name" ColumnName="move_name" />
+                <ScalarProperty Name="release_Year" ColumnName="release_Year" />
+                <ScalarProperty Name="language" ColumnName="language" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="duration_in_mintues" ColumnName="duration_in_mintues" />
+                <ScalarProperty Name="movie_type" ColumnName="movie_type" />
+                <ScalarProperty Name="movie_category" ColumnName="movie_category" />
+                <ScalarProperty Name="director_name" ColumnName="director_name" />
+                <ScalarProperty Name="lead_actor_name1" ColumnName="lead_actor_name1" />
+                <ScalarProperty Name="lead_actor_name2" ColumnName="lead_actor_name2" />
+                <ScalarProperty Name="rental_cost" ColumnName="rental_cost" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

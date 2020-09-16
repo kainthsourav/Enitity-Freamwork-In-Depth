@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace EnitityFreamworkInDepth
 {
+
+   
     class Program
     {
         static void Main(string[] args)
@@ -19,7 +21,17 @@ namespace EnitityFreamworkInDepth
                 Postid = 1
             };
             context.dbo_Posts.Add(post);
-            context.SaveChanges();
+            
+            //DifferentDatabse
+
+            var DiffContext = new KainthsouravEntities();
+            var Data= DiffContext.GetData();
+            foreach (var item in Data)
+            {
+                Console.WriteLine(item.move_name);
+                Console.WriteLine(item.movie_category);
+            }
+           
         }
     }
 }
