@@ -25,13 +25,23 @@ namespace EnitityFreamworkInDepth
             //DifferentDatabse
 
             var DiffContext = new KainthsouravEntities();
-            var Data= DiffContext.GetData();
+            var Data = DiffContext.getMovieData();
             foreach (var item in Data)
             {
                 Console.WriteLine(item.move_name);
                 Console.WriteLine(item.movie_category);
             }
-           
+
+            //using enum to give value
+            var UserType = new UserProfile()
+            {
+                UserProfileId = 549,
+                UserName = "Sourav",
+                UserMemberShipType = User_memeberShipType.Plantium //using enum here
+            };
+            DiffContext.UserProfiles.Add(UserType);
+            DiffContext.SaveChanges();
+
         }
     }
 }

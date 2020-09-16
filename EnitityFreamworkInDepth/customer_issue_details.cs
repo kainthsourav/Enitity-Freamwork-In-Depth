@@ -14,7 +14,7 @@ namespace EnitityFreamworkInDepth
     
     public partial class customer_issue_details
     {
-        public string issue_id { get; set; }
+        public Issue_Type issue_id { get; set; }
         public string customer_id { get; set; }
         public string movie_id { get; set; }
         public System.DateTime issue_date { get; set; }

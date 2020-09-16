@@ -10,12 +10,11 @@
 namespace EnitityFreamworkInDepth
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class UserProfile
+    public enum Issue_Type : int
     {
-        public int UserProfileId { get; set; }
-        public string UserName { get; set; }
-        public User_memeberShipType UserMemberShipType { get; set; }
+        New = 1,
+        Reissue = 2,
+        Returned = 3
     }
 }

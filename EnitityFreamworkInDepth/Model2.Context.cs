@@ -57,9 +57,14 @@ namespace EnitityFreamworkInDepth
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
         }
     
-        public virtual ObjectResult<GetData_Result> GetData()
+        public virtual ObjectResult<movies_master> getMovieData()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetData_Result>("GetData");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<movies_master>("getMovieData");
+        }
+    
+        public virtual ObjectResult<movies_master> getMovieData(MergeOption mergeOption)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<movies_master>("getMovieData", mergeOption);
         }
     }
 }

@@ -10,12 +10,11 @@
 namespace EnitityFreamworkInDepth
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class UserProfile
+    public enum User_memeberShipType : byte
     {
-        public int UserProfileId { get; set; }
-        public string UserName { get; set; }
-        public User_memeberShipType UserMemberShipType { get; set; }
+        Silver = 1,
+        Gold = 2,
+        Plantium = 3
     }
 }
