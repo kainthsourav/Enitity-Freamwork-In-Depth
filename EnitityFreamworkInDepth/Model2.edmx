@@ -1,0 +1,488 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="KainthsouravModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Kainthsourav.dbo.CRUD' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CRUD">
+          <Key>
+            <PropertyRef Name="Userid" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="Password" />
+          </Key>
+          <Property Name="Userid" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Kainthsourav.dbo.customer_card_details' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="customer_card_details">
+          <Key>
+            <PropertyRef Name="customer_id" />
+            <PropertyRef Name="card_id" />
+            <PropertyRef Name="issue_date" />
+          </Key>
+          <Property Name="customer_id" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="card_id" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="issue_date" Type="date" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Kainthsourav.dbo.customer_issue_details' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="customer_issue_details">
+          <Key>
+            <PropertyRef Name="issue_id" />
+            
+            
+            
+            
+            
+          </Key>
+          <Property Name="issue_id" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="customer_id" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="movie_id" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="issue_date" Type="date" Nullable="false" />
+          <Property Name="return_date" Type="date" Nullable="false" />
+          <Property Name="actual_date_of_return" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="customer_master">
+          <Key>
+            <PropertyRef Name="customer_id" />
+          </Key>
+          <Property Name="customer_id" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="customer_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="contact_no" Type="int" Nullable="false" />
+          <Property Name="contact_address" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="date_of_regsitration" Type="date" Nullable="false" />
+          <Property Name="age" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="library_card_master">
+          <Key>
+            <PropertyRef Name="card_id" />
+          </Key>
+          <Property Name="card_id" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="30" />
+          <Property Name="amount" Type="int" />
+          <Property Name="number_of_years" Type="int" />
+        </EntityType>
+        <EntityType Name="movies_master">
+          <Key>
+            <PropertyRef Name="movie_id" />
+          </Key>
+          <Property Name="movie_id" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="move_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="release_Year" Type="int" Nullable="false" />
+          <Property Name="language" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="rating" Type="int" Nullable="false" />
+          <Property Name="duration_in_mintues" Type="int" Nullable="false" />
+          <Property Name="movie_type" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="movie_category" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="director_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="lead_actor_name1" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="lead_actor_name2" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="rental_cost" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserProfileId" />
+          </Key>
+          <Property Name="UserProfileId" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_customer_card_details_customer_master">
+          <End Role="customer_master" Type="Self.customer_master" Multiplicity="1" />
+          <End Role="customer_card_details" Type="Self.customer_card_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer_master">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="customer_card_details">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_customer_card_details_library_card_master">
+          <End Role="library_card_master" Type="Self.library_card_master" Multiplicity="1" />
+          <End Role="customer_card_details" Type="Self.customer_card_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="library_card_master">
+              <PropertyRef Name="card_id" />
+            </Principal>
+            <Dependent Role="customer_card_details">
+              <PropertyRef Name="card_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_customer_issue_details_customer_master">
+          <End Role="customer_master" Type="Self.customer_master" Multiplicity="1" />
+          <End Role="customer_issue_details" Type="Self.customer_issue_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer_master">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="customer_issue_details">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_customer_issue_details_movies_master">
+          <End Role="movies_master" Type="Self.movies_master" Multiplicity="1" />
+          <End Role="customer_issue_details" Type="Self.customer_issue_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="movies_master">
+              <PropertyRef Name="movie_id" />
+            </Principal>
+            <Dependent Role="customer_issue_details">
+              <PropertyRef Name="movie_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KainthsouravModelStoreContainer">
+          <EntitySet Name="customer_master" EntityType="Self.customer_master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="library_card_master" EntityType="Self.library_card_master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="movies_master" EntityType="Self.movies_master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CRUD" EntityType="Self.CRUD" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CRUD].[Userid] AS [Userid], 
+    [CRUD].[UserName] AS [UserName], 
+    [CRUD].[Password] AS [Password]
+    FROM [dbo].[CRUD] AS [CRUD]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="customer_card_details" EntityType="Self.customer_card_details" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [customer_card_details].[customer_id] AS [customer_id], 
+    [customer_card_details].[card_id] AS [card_id], 
+    [customer_card_details].[issue_date] AS [issue_date]
+    FROM [dbo].[customer_card_details] AS [customer_card_details]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="customer_issue_details" EntityType="Self.customer_issue_details" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [customer_issue_details].[issue_id] AS [issue_id], 
+    [customer_issue_details].[customer_id] AS [customer_id], 
+    [customer_issue_details].[movie_id] AS [movie_id], 
+    [customer_issue_details].[issue_date] AS [issue_date], 
+    [customer_issue_details].[return_date] AS [return_date], 
+    [customer_issue_details].[actual_date_of_return] AS [actual_date_of_return]
+    FROM [dbo].[customer_issue_details] AS [customer_issue_details]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_customer_card_details_customer_master" Association="Self.FK_customer_card_details_customer_master">
+            <End Role="customer_master" EntitySet="customer_master" />
+            <End Role="customer_card_details" EntitySet="customer_card_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_customer_card_details_library_card_master" Association="Self.FK_customer_card_details_library_card_master">
+            <End Role="library_card_master" EntitySet="library_card_master" />
+            <End Role="customer_card_details" EntitySet="customer_card_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_customer_issue_details_customer_master" Association="Self.FK_customer_issue_details_customer_master">
+            <End Role="customer_master" EntitySet="customer_master" />
+            <End Role="customer_issue_details" EntitySet="customer_issue_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_customer_issue_details_movies_master" Association="Self.FK_customer_issue_details_movies_master">
+            <End Role="movies_master" EntitySet="movies_master" />
+            <End Role="customer_issue_details" EntitySet="customer_issue_details" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KainthsouravModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="customer_issue_details">
+          <Key>
+            <PropertyRef Name="issue_id" />
+          </Key>
+          <Property Name="issue_id" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="customer_id" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="movie_id" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="issue_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="return_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="actual_date_of_return" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="customer_master" Relationship="Self.FK_customer_issue_details_customer_master" FromRole="customer_issue_details" ToRole="customer_master" />
+          <NavigationProperty Name="movies_master" Relationship="Self.FK_customer_issue_details_movies_master" FromRole="customer_issue_details" ToRole="movies_master" />
+        </EntityType>
+        <EntityType Name="customer_master">
+          <Key>
+            <PropertyRef Name="customer_id" />
+          </Key>
+          <Property Name="customer_id" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="customer_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contact_no" Type="Int32" Nullable="false" />
+          <Property Name="contact_address" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_of_regsitration" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="age" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="customer_issue_details" Relationship="Self.FK_customer_issue_details_customer_master" FromRole="customer_master" ToRole="customer_issue_details" />
+          <NavigationProperty Name="customer_card_details" Relationship="Self.FK_customer_card_details_customer_master" FromRole="customer_master" ToRole="customer_card_details" />
+        </EntityType>
+        <EntityType Name="library_card_master">
+          <Key>
+            <PropertyRef Name="card_id" />
+          </Key>
+          <Property Name="card_id" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="amount" Type="Int32" />
+          <Property Name="number_of_years" Type="Int32" />
+          <NavigationProperty Name="customer_card_details" Relationship="Self.FK_customer_card_details_library_card_master" FromRole="library_card_master" ToRole="customer_card_details" />
+        </EntityType>
+        <EntityType Name="movies_master">
+          <Key>
+            <PropertyRef Name="movie_id" />
+          </Key>
+          <Property Name="movie_id" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="move_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="release_Year" Type="Int32" Nullable="false" />
+          <Property Name="language" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rating" Type="Int32" Nullable="false" />
+          <Property Name="duration_in_mintues" Type="Int32" Nullable="false" />
+          <Property Name="movie_type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="movie_category" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="director_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lead_actor_name1" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lead_actor_name2" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rental_cost" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="customer_issue_details" Relationship="Self.FK_customer_issue_details_movies_master" FromRole="movies_master" ToRole="customer_issue_details" />
+        </EntityType>
+        <EntityType Name="CRUD">
+          <Key>
+            <PropertyRef Name="Userid" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="Password" />
+          </Key>
+          <Property Name="Userid" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="customer_card_details">
+          <Key>
+            <PropertyRef Name="customer_id" />
+            <PropertyRef Name="card_id" />
+            <PropertyRef Name="issue_date" />
+          </Key>
+          <Property Name="customer_id" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="card_id" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="issue_date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="customer_master" Relationship="Self.FK_customer_card_details_customer_master" FromRole="customer_card_details" ToRole="customer_master" />
+          <NavigationProperty Name="library_card_master" Relationship="Self.FK_customer_card_details_library_card_master" FromRole="customer_card_details" ToRole="library_card_master" />
+        </EntityType>
+        <Association Name="FK_customer_issue_details_customer_master">
+          <End Role="customer_master" Type="Self.customer_master" Multiplicity="1" />
+          <End Role="customer_issue_details" Type="Self.customer_issue_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer_master">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="customer_issue_details">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_customer_issue_details_movies_master">
+          <End Role="movies_master" Type="Self.movies_master" Multiplicity="1" />
+          <End Role="customer_issue_details" Type="Self.customer_issue_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="movies_master">
+              <PropertyRef Name="movie_id" />
+            </Principal>
+            <Dependent Role="customer_issue_details">
+              <PropertyRef Name="movie_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_customer_card_details_customer_master">
+          <End Role="customer_master" Type="Self.customer_master" Multiplicity="1" />
+          <End Role="customer_card_details" Type="Self.customer_card_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer_master">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="customer_card_details">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_customer_card_details_library_card_master">
+          <End Role="library_card_master" Type="Self.library_card_master" Multiplicity="1" />
+          <End Role="customer_card_details" Type="Self.customer_card_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="library_card_master">
+              <PropertyRef Name="card_id" />
+            </Principal>
+            <Dependent Role="customer_card_details">
+              <PropertyRef Name="card_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KainthsouravEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="customer_issue_details" EntityType="Self.customer_issue_details" />
+          <EntitySet Name="customer_master" EntityType="Self.customer_master" />
+          <EntitySet Name="library_card_master" EntityType="Self.library_card_master" />
+          <EntitySet Name="movies_master" EntityType="Self.movies_master" />
+          <EntitySet Name="CRUDs" EntityType="Self.CRUD" />
+          <EntitySet Name="customer_card_details" EntityType="Self.customer_card_details" />
+          <AssociationSet Name="FK_customer_issue_details_customer_master" Association="Self.FK_customer_issue_details_customer_master">
+            <End Role="customer_master" EntitySet="customer_master" />
+            <End Role="customer_issue_details" EntitySet="customer_issue_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_customer_issue_details_movies_master" Association="Self.FK_customer_issue_details_movies_master">
+            <End Role="movies_master" EntitySet="movies_master" />
+            <End Role="customer_issue_details" EntitySet="customer_issue_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_customer_card_details_customer_master" Association="Self.FK_customer_card_details_customer_master">
+            <End Role="customer_master" EntitySet="customer_master" />
+            <End Role="customer_card_details" EntitySet="customer_card_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_customer_card_details_library_card_master" Association="Self.FK_customer_card_details_library_card_master">
+            <End Role="library_card_master" EntitySet="library_card_master" />
+            <End Role="customer_card_details" EntitySet="customer_card_details" />
+          </AssociationSet>
+          <EntitySet Name="UserProfiles" EntityType="KainthsouravModel.UserProfile" />
+          <EntitySet Name="sysdiagrams" EntityType="KainthsouravModel.sysdiagram" />
+        </EntityContainer>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserProfileId" />
+          </Key>
+          <Property Name="UserProfileId" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KainthsouravModelStoreContainer" CdmEntityContainer="KainthsouravEntities">
+          <EntitySetMapping Name="customer_issue_details">
+            <EntityTypeMapping TypeName="KainthsouravModel.customer_issue_details">
+              <MappingFragment StoreEntitySet="customer_issue_details">
+                <ScalarProperty Name="issue_id" ColumnName="issue_id" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="movie_id" ColumnName="movie_id" />
+                <ScalarProperty Name="issue_date" ColumnName="issue_date" />
+                <ScalarProperty Name="return_date" ColumnName="return_date" />
+                <ScalarProperty Name="actual_date_of_return" ColumnName="actual_date_of_return" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customer_master">
+            <EntityTypeMapping TypeName="KainthsouravModel.customer_master">
+              <MappingFragment StoreEntitySet="customer_master">
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+                <ScalarProperty Name="contact_no" ColumnName="contact_no" />
+                <ScalarProperty Name="contact_address" ColumnName="contact_address" />
+                <ScalarProperty Name="date_of_regsitration" ColumnName="date_of_regsitration" />
+                <ScalarProperty Name="age" ColumnName="age" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="library_card_master">
+            <EntityTypeMapping TypeName="KainthsouravModel.library_card_master">
+              <MappingFragment StoreEntitySet="library_card_master">
+                <ScalarProperty Name="card_id" ColumnName="card_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="number_of_years" ColumnName="number_of_years" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="movies_master">
+            <EntityTypeMapping TypeName="KainthsouravModel.movies_master">
+              <MappingFragment StoreEntitySet="movies_master">
+                <ScalarProperty Name="release_Year" ColumnName="release_Year" />
+                <ScalarProperty Name="movie_id" ColumnName="movie_id" />
+                <ScalarProperty Name="move_name" ColumnName="move_name" />
+                <ScalarProperty Name="language" ColumnName="language" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="duration_in_mintues" ColumnName="duration_in_mintues" />
+                <ScalarProperty Name="movie_type" ColumnName="movie_type" />
+                <ScalarProperty Name="movie_category" ColumnName="movie_category" />
+                <ScalarProperty Name="director_name" ColumnName="director_name" />
+                <ScalarProperty Name="lead_actor_name1" ColumnName="lead_actor_name1" />
+                <ScalarProperty Name="lead_actor_name2" ColumnName="lead_actor_name2" />
+                <ScalarProperty Name="rental_cost" ColumnName="rental_cost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CRUDs">
+            <EntityTypeMapping TypeName="KainthsouravModel.CRUD">
+              <MappingFragment StoreEntitySet="CRUD">
+                <ScalarProperty Name="Userid" ColumnName="Userid" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customer_card_details">
+            <EntityTypeMapping TypeName="KainthsouravModel.customer_card_details">
+              <MappingFragment StoreEntitySet="customer_card_details">
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="card_id" ColumnName="card_id" />
+                <ScalarProperty Name="issue_date" ColumnName="issue_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfiles">
+            <EntityTypeMapping TypeName="KainthsouravModel.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserProfileId" ColumnName="UserProfileId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="KainthsouravModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
