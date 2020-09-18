@@ -20,14 +20,7 @@ namespace Queries
             System.Console.ReadLine();
 
             System.Console.WriteLine("Extention Method");
-            //Extention method
-            var CourseData = context.Courses.Where(c => c.Name.Contains("C#")).OrderBy(c => c.Name);
-            foreach (var item in CourseData)
-            {
-                System.Console.WriteLine(item.Name);
-            }
-            System.Console.ReadLine();
-
+           
             //Restrication
             var queryRes = from c in context.Courses
                            where (c.Level == 1 && c.AuthorId==1)
@@ -83,7 +76,62 @@ namespace Queries
             }
 
 
+            //Extention method
+            var CourseData = context.Courses.Where(c => c.Name.Contains("C#")).OrderBy(c => c.Name);
+            foreach (var item in CourseData)
+            {
+                System.Console.WriteLine(item.Name);
+            }
+            System.Console.ReadLine();
 
+            //restiction
+            var res = context.Courses
+                .Where(c => c.Level == 1)
+                .OrderBy(c=>c.Name)
+                .ThenByDescending(c=>c.Level);
+            // Projection
+            var proj = context.Courses
+                .Where(c => c.Level == 1)
+                .OrderBy(c => c.Name)
+                .ThenByDescending(c => c.Level)
+                .SelectMany(c => c.Tags)
+                .Distinct();
+
+            foreach (var item in proj)
+            {
+                System.Console.WriteLine(item.Name);
+            }
+
+            //groupinh
+
+            var grop = context.Courses
+                .GroupBy(c => c.Level);
+            foreach (var item in grop)
+            {
+                System.Console.WriteLine("Key : "+item.Key);
+                foreach ( var i in item)
+                {
+                    System.Console.WriteLine("\t",i.Name);
+                }
+                
+            }
+            //join
+            context.Courses.Join(context.Authors,
+                c => c.AuthorId, 
+                a => a.Id, 
+                (course, author) =>
+                   new
+                   {
+                       CourseName = course.Name,
+                       AuthorName = author.Name
+                   });
+
+            context.Authors.GroupJoin(context.Courses, a => a.Id, c => c.AuthorId, (author, cours) =>
+                   new
+                   {
+                       AuthorName=author.Name,
+                       CourseName= cours
+                   });
             System.Console.ReadLine();
         }
     }
