@@ -18,7 +18,8 @@ namespace CodeFirstFromExistingDatabase
         public int Id { get; set; }
 
         public string Name { get; set; }
-
+        
+       // [Required]  data anotonation
         public string Description { get; set; }
 
        

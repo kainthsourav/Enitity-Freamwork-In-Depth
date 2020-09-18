@@ -86,6 +86,10 @@
     <Compile Include="Migrations\202009171818300_DeleteCategoryTbl.Designer.cs">
       <DependentUpon>202009171818300_DeleteCategoryTbl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009180300104_FluentAPI_Final.cs" />
+    <Compile Include="Migrations\202009180300104_FluentAPI_Final.Designer.cs">
+      <DependentUpon>202009180300104_FluentAPI_Final.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model1.cs" />
     <Compile Include="Program.cs" />
@@ -120,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009171818300_DeleteCategoryTbl.resx">
       <DependentUpon>202009171818300_DeleteCategoryTbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009180300104_FluentAPI_Final.resx">
+      <DependentUpon>202009180300104_FluentAPI_Final.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
