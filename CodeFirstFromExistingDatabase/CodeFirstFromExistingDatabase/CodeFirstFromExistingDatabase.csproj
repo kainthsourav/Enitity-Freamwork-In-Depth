@@ -86,10 +86,6 @@
     <Compile Include="Migrations\202009171818300_DeleteCategoryTbl.Designer.cs">
       <DependentUpon>202009171818300_DeleteCategoryTbl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202009180300104_FluentAPI_Final.cs" />
-    <Compile Include="Migrations\202009180300104_FluentAPI_Final.Designer.cs">
-      <DependentUpon>202009180300104_FluentAPI_Final.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\202009180322431_AddAnotoationToCourseTable.cs" />
     <Compile Include="Migrations\202009180322431_AddAnotoationToCourseTable.Designer.cs">
       <DependentUpon>202009180322431_AddAnotoationToCourseTable.cs</DependentUpon>
@@ -128,9 +124,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009171818300_DeleteCategoryTbl.resx">
       <DependentUpon>202009171818300_DeleteCategoryTbl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009180300104_FluentAPI_Final.resx">
-      <DependentUpon>202009180300104_FluentAPI_Final.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009180322431_AddAnotoationToCourseTable.resx">
       <DependentUpon>202009180322431_AddAnotoationToCourseTable.cs</DependentUpon>
