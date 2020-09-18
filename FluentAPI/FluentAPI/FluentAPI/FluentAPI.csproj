@@ -51,6 +51,20 @@
   <ItemGroup>
     <Compile Include="Author.cs" />
     <Compile Include="Course.cs" />
+    <Compile Include="Cover.cs" />
+    <Compile Include="EntityConfig\CourseConfig.cs" />
+    <Compile Include="Migrations\202009180339531_intialModel.cs" />
+    <Compile Include="Migrations\202009180339531_intialModel.Designer.cs">
+      <DependentUpon>202009180339531_intialModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009180402306_intialModel1.cs" />
+    <Compile Include="Migrations\202009180402306_intialModel1.Designer.cs">
+      <DependentUpon>202009180402306_intialModel1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009180413444_intialModel2.cs" />
+    <Compile Include="Migrations\202009180413444_intialModel2.Designer.cs">
+      <DependentUpon>202009180413444_intialModel2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PlutoContext.cs" />
     <Compile Include="Program.cs" />
@@ -62,6 +76,17 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202009180339531_intialModel.resx">
+      <DependentUpon>202009180339531_intialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009180402306_intialModel1.resx">
+      <DependentUpon>202009180402306_intialModel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009180413444_intialModel2.resx">
+      <DependentUpon>202009180413444_intialModel2.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using FluentAPI;
+using System.Data.Entity;
 
 namespace DataAnnotations
 {
@@ -12,5 +13,12 @@ namespace DataAnnotations
         public virtual DbSet<Author> Authors { get; set; }
         public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Configurations.Add(new CourseConfig());
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
