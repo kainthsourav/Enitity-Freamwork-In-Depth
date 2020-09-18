@@ -2,6 +2,7 @@ namespace CodeFirstFromExistingDatabase
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
@@ -15,11 +16,15 @@ namespace CodeFirstFromExistingDatabase
             Tags = new HashSet<Tag>();
         }
 
+       
         public int Id { get; set; }
 
+        [Required]
+        [MaxLength(255)]
         public string Name { get; set; }
         
-       // [Required]  data anotonation
+       [Required]
+       [MaxLength(255)]
         public string Description { get; set; }
 
        
@@ -27,6 +32,7 @@ namespace CodeFirstFromExistingDatabase
 
         public float FullPrice { get; set; }
 
+        [DisplayName("AuthorId")]
         public int? Author_Id { get; set; }
 
         public virtual Author Author { get; set; }
