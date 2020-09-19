@@ -126,12 +126,24 @@ namespace Queries
                        AuthorName = author.Name
                    });
 
+            //groupJoin
             context.Authors.GroupJoin(context.Courses, a => a.Id, c => c.AuthorId, (author, cours) =>
                    new
                    {
-                       AuthorName=author.Name,
-                       CourseName= cours
+                       AuthorName = author,
+                       CourseName = cours.Count()
                    });
+
+            //Cross
+            context.Authors.SelectMany(a => context.Courses, (author, course) => new
+            {
+                AuthorName = author.Name,
+                CourseName = course
+            });
+
+
+            //par
+
             System.Console.ReadLine();
         }
     }
